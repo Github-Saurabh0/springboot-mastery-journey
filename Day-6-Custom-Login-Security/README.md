@@ -56,19 +56,23 @@ Day-6-Custom-Login-Security/
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Login Page</title>
+    <title>Custom Login</title>
 </head>
 <body>
-    <h2>Login</h2>
+    <h2>Please Login</h2>
     <form th:action="@{/login}" method="post">
-        <label>Username:</label>
-        <input type="text" name="username"/><br/>
-        <label>Password:</label>
-        <input type="password" name="password"/><br/>
-        <button type="submit">Login</button>
+        <div>
+            <label>Username:</label>
+            <input type="text" name="username" />
+        </div>
+        <div>
+            <label>Password:</label>
+            <input type="password" name="password" />
+        </div>
+        <div>
+            <button type="submit">Login</button>
+        </div>
     </form>
-    <p th:if="${param.error}">Invalid username or password.</p>
-    <p th:if="${param.logout}">You have been logged out.</p>
 </body>
 </html>
 ```
@@ -79,40 +83,46 @@ Day-6-Custom-Login-Security/
 
 ```java
 @Configuration
-@EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests(auth -> auth
+            .authorizeHttpRequests()
                 .requestMatchers("/students/**").authenticated()
                 .anyRequest().permitAll()
-            )
-            .formLogin(form -> form
-                .loginPage("/login")
+            .and()
+            .formLogin()
+                .loginPage("/login")  // ✅ Custom login page
+                .defaultSuccessUrl("/students", true)
                 .permitAll()
-            )
-            .logout(logout -> logout
-                .logoutSuccessUrl("/login?logout")
-                .permitAll()
-            );
-        return http.build();
-    }
+            .and()
+            .logout()
+                .permitAll();
 
-    @Bean
-    public UserDetailsService users() {
-        UserDetails user = User.builder()
-            .username("wearl")
-            .password("{noop}pass123")
-            .roles("USER")
-            .build();
-        return new InMemoryUserDetailsManager(user);
+        return http.build();
     }
 }
 ```
 
 ---
+
+### 🔐 `LoginController.java`
+
+```java
+@Controller
+public class LoginController {
+
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";  // this looks for login.html inside /templates
+    }
+}
+
+```
+
+---
+
 
 ### 🔑 Login Credentials
 
