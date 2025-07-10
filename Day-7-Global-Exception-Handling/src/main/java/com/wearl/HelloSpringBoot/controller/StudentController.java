@@ -8,7 +8,7 @@ import java.util.List;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/students")
+@RequestMapping("api/students")
 public class StudentController {
 
     @Autowired
@@ -17,6 +17,11 @@ public class StudentController {
     @GetMapping
     public List<Student> getAll() {
         return studentService.getAllStudents();
+    }
+
+    @GetMapping("/{id}")
+    public Student getById(@PathVariable int id) {
+        return studentService.getStudentById(id);
     }
 
     @PostMapping
