@@ -11,12 +11,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+            .csrf().disable() // ❗ important if you're testing via Postman
             .authorizeHttpRequests()
-                .requestMatchers("/students/**").authenticated()
-                .anyRequest().permitAll()
+                .requestMatchers("/api/**").permitAll() // ✅ allow API calls
+                .anyRequest().authenticated()
             .and()
             .formLogin()
-                .loginPage("/login")  // ✅ Custom login page
+                .loginPage("/login")  
                 .defaultSuccessUrl("/students", true)
                 .permitAll()
             .and()
