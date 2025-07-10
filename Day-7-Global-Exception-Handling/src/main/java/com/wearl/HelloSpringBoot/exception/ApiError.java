@@ -1,13 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.wearl.HelloSpringBoot.exception;
-
-/**
- *
- * @author Saurabh
- */
 
 import java.time.LocalDateTime;
 
@@ -16,19 +7,27 @@ public class ApiError {
     private String details;
     private LocalDateTime timestamp;
 
-    public ApiError(String message, String details) {
+    public ApiError(String message, String details, LocalDateTime timestamp) {
         this.message = message;
         this.details = details;
-        this.timestamp = LocalDateTime.now();
+        this.timestamp = timestamp;
     }
 
-    // Getters and Setters
-    public String getMessage() { return message; }
-    public void setMessage(String message) { this.message = message; }
+    public ApiError(String message, String details) {
+        this(message, details, LocalDateTime.now());
+    }
 
-    public String getDetails() { return details; }
-    public void setDetails(String details) { this.details = details; }
+    // Getters and setters (or use Lombok @Data if preferred)
 
-    public LocalDateTime getTimestamp() { return timestamp; }
-    public void setTimestamp(LocalDateTime timestamp) { this.timestamp = timestamp; }
+    public String getMessage() {
+        return message;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
 }
