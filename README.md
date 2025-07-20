@@ -8,12 +8,15 @@ Welcome to the **Spring Boot Mastery Journey** – a day-by-day hands-on learnin
 
 ```
 springboot-mastery-journey/
-├── Day-1-Hello-SpringBoot/
-├── Day-2-RestAPI-CRUD/
-├── Day-3-JPA-MySQL/
-├── Day-4-Validation/
-├── Day-5-Security-Basics/
-├── ...
+├── Day-1-Hello-SpringBoot/                 # Spring Boot Setup – Hello World + Default Credentials
+├── Day-2-RestAPI-CRUD/                     # REST API with CRUD Operations + Default Spring Security Login
+├── Day-3-JPA-MySQL/                        # Integrate JPA with MySQL Database
+├── Day-4-Validation-Exception/             # JPA Validation and Global Exception Handling
+├── Day-5-Security-Basics/                  # Spring Security Fundamentals + Folder Structure
+├── Day-6-Custom-Login/                     # Custom Login Page using Spring Security
+├── Day-7-Global-Exception-Handling/        # Enhanced Global Exception Handling + Default Login Setup
+├── Day-8-Service-Layer-DTO-Mapper/         # Service Layer, DTO Pattern, and MapStruct Integration
+
 ```
 
 Each folder contains:
